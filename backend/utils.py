@@ -18,20 +18,34 @@ def as_form(cls):
 
     return cls
 
+def get_env_var(key: str):
+    if key in os.environ:
+        return os.environ[key]
+    raise ValueError(f"Missing Env Param: {key}")
+
 def get_uploads_directory():
-    if "UPLOADS_DIRECTORY" in os.environ:
-        return os.environ["UPLOADS_DIRECTORY"]
-    raise ValueError("Missing UPLOADS_DIRECTORY Env Parameter")
+    return get_env_var("UPLOADS_DIRECTORY")
 
 def get_pinecone_api_key():
-    if "PINECONE_API_KEY" in os.environ:
-        return os.environ['PINECONE_API_KEY']
-    raise ValueError("Missing Pinecone_API_Key Env Parameter")
+    return get_env_var("PINECONE_API_KEY")
 
 def get_pinecone_index_name():
-    if "PINECONE_INDEX_NAME" in os.environ:
-        return os.environ["PINECONE_INDEX_NAME"]
-    raise ValueError("Missing PINECONE_INDEX_NAME Env Parameter")
+    return get_env_var("PINECONE_INDEX_NAME")
+
+def get_aws_secret_key():
+    return get_env_var("AWS_SECRET_KEY")
+
+def get_aws_access_id():
+    return get_env_var("AWS_ACCESS_ID")
+
+def get_aws_bucket_name():
+    return get_env_var("AWS_BUCKET_NAME")
+
+def get_aws_endpoint_url():
+    return get_env_var("AWS_ENDPOINT_URL")
+
+def get_aws_public_url():
+    return get_env_var("AWS_PUBLIC_URL")
 
 def batch_inputs(data: List, batch_size: int = 32):
     for i in range(0, len(data), batch_size):
@@ -39,6 +53,6 @@ def batch_inputs(data: List, batch_size: int = 32):
 
 def setup_uploads_directory():
     uploads_directory = get_uploads_directory()
-    os.makedirs(os.path.join(uploads_directory, "documents"), exist_ok=True)
-    os.makedirs(os.path.join(uploads_directory, "images"), exist_ok=True)
+    os.makedirs(os.path.join(uploads_directory, "reports"), exist_ok=True)
+    os.makedirs(os.path.join(uploads_directory, "posters"), exist_ok=True)
     return uploads_directory
