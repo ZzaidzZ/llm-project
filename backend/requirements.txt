@@ -7,4 +7,5 @@ python-docx
 open_clip_torch
 python-multipart
 langchain-community
-python-doctr[torch]
+aiofiles
+boto3
