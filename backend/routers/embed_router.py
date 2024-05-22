@@ -83,5 +83,7 @@ class EmbeddingRouter(APIRouter):
         }]
         self.vectordb.upsert_vectors(vectors)
         
-        return True
+        return {
+            "upload_success": True
+        }
         
