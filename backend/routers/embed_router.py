@@ -62,7 +62,9 @@ class EmbeddingRouter(APIRouter):
                     }
                 })
             self.vectordb.upsert_vectors(vectors)
-            return True
+            return {
+                "upload_success": True
+            }
         
         file_name = os.path.join("posters", f'{input_data.project_id}.png')
         success = self.r2_storage.upload_document(input_data.document, file_path=file_name)
