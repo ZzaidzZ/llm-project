@@ -35,8 +35,8 @@ def parse_text_document(_file: UploadFile):
     match file_extension.lower():
         case "pdf":
             text = read_pdf_document(_file)
-        case "docx":
-            text = read_docx(_file)
+        # case "docx":
+        #     text = read_docx(_file)
         case _:
             raise HTTPException(status_code=400, detail="Bad Request. Only PDF or Docx supported for text documents")
     return text

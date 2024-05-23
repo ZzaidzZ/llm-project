@@ -3,9 +3,11 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
 from routers.embed_router import EmbeddingRouter
+from routers.query_router import QueryRouter
 
 app = FastAPI()
-app.include_router(EmbeddingRouter().router)
+app.include_router(EmbeddingRouter().router, prefix='/api')
+app.include_router(QueryRouter().router, prefix='/api')
 
 app.add_middleware(
     CORSMiddleware,
